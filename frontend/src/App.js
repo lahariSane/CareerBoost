@@ -7,20 +7,31 @@ import LandingPage from './Components/LandingPage/LandingPage';
 function App() {
   return (
     <Router>
-      <div className="flex flex-col min-h-screen">
-        {/* Navbar */}
-        <Navbar />
+      <Routes>
+        {/* Routes without the layout */}
 
-        {/* Main Content */}
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<LandingPage />} />
-          </Routes>
-        </main>
+        {/* Routes with the layout */}
+        <Route
+          path="/*"
+          element={
+            <div className="flex flex-col min-h-screen">
+              {/* Navbar */}
+              <Navbar />
 
-        {/* Footer */}
-        <Footer />
-      </div>
+              {/* Main Content */}
+              <main className="flex-grow">
+                <Routes>
+                  <Route path="/" element={<LandingPage />} />
+                  {/* Add other layout-based routes here */}
+                </Routes>
+              </main>
+
+              {/* Footer */}
+              <Footer />
+            </div>
+          }
+        />
+      </Routes>
     </Router>
   );
 }
