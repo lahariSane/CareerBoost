@@ -8,30 +8,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Routes without the layout */}
-    
-        {/* Routes with the layout */}
-        <Route
-          path="/*"
-          element={
-            <div className="flex flex-col min-h-screen">
-              {/* Navbar */}
-//               <Navbar />
-
-
-              {/* Main Content */}
-              <main className="flex-grow">
-                <Routes>
-                  <Route path="/" element={<LandingPage />} />
-                  {/* Add other layout-based routes here */}
-                </Routes>
-              </main>
-
-              {/* Footer */}
-//               <Footer />
-            </div>
-          }
-        />
+        <Route path="/" element={<LandingPage />} />
       </Routes>
     </Router>
   );
