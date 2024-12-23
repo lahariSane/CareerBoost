@@ -16,8 +16,8 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSignup} className="space-y-4">
-      <div>
+    <form onSubmit={handleSignup} className="space-y-4 flex flex-col items-center">
+      <div className="w-full">
         <label htmlFor="name" className="block text-sm font-medium text-teriary-dark">
           Full Name
         </label>
@@ -28,7 +28,7 @@ const Signup = () => {
           required
         />
       </div>
-      <div>
+      <div className="w-full">
         <label htmlFor="email" className="block text-sm font-medium text-tertiary-dark">
           Email
         </label>
@@ -39,7 +39,7 @@ const Signup = () => {
           required
         />
       </div>
-      <div>
+      <div className="w-full">
         <label htmlFor="password" className="block text-sm font-medium text-tertiary-dark">
           Password
         </label>
@@ -52,24 +52,24 @@ const Signup = () => {
       </div>
       <button
         type="submit"
-        className="w-full py-2 px-4 bg-secondary-beige text-tertiary-dark rounded-md hover:bg-secondary-darkBeige"
+        className="w-1/2 py-2 px-4 bg-secondary-beige text-tertiary-dark rounded-md hover:bg-secondary-darkBeige"
       >
         Sign Up
       </button>
       
-      <Divider className="mt-4 border-tertiary-dark">OR</Divider>
-      <div className="flex flex-col justify-between items-center mt-4">
+      <Divider className="w-full">OR</Divider>
+      <div className="w-full flex flex-col justify-between items-center mt-4">
         <button
           type="button"
           onClick={handleGoogleSignup}
-          className="w-full mt-2 py-2 px-4 bg-secondary-mauve text-white rounded-md hover:bg-secondary-green"
+          className="w-3/4 mt-2 py-2 px-4 bg-secondary-mauve text-white rounded-md hover:bg-secondary-green"
         >
           Sign up with Google
         </button>
         <button
           type="button"
           onClick={handleGitHubSignup}
-          className="w-full mt-2 py-2 px-4 bg-secondary-mauve text-white rounded-md hover:bg-secondary-green"
+          className="w-3/4 mt-2 py-2 px-4 bg-secondary-mauve text-white rounded-md hover:bg-secondary-green"
         >
           Sign up with GitHub
         </button>

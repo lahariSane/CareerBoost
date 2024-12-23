@@ -13,8 +13,8 @@ const ForgotPassword = () => {
   return (
     <div>
       {!success ? (
-        <form onSubmit={handleForgotPassword} className="space-y-4">
-          <div>
+        <form onSubmit={handleForgotPassword} className="space-y-4 flex flex-col items-center">
+          <div className="w-full">
             <label htmlFor="email" className="block text-sm font-medium text-tertiary-dark">
               Enter your registered email
             </label>
@@ -29,7 +29,7 @@ const ForgotPassword = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-secondary-beige text-tertiary-dark rounded-md hover:bg-secondary-darkBeige"
+            className="w-1/2 py-2 px-4 bg-secondary-beige text-tertiary-dark rounded-md hover:bg-secondary-darkBeige"
           >
             Reset Password
           </button>
