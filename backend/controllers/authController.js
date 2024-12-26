@@ -1,5 +1,7 @@
 import bcrypt from 'bcryptjs'; // If using bcrypt to hash passwords
 import User from '../models/User.js'; // Assuming you have a User model to interact with MongoDB
+import { client } from '../utils/googleOAuth.js'; // Google OAuth client
+
 
 // Login Controller
 export const loginUser = async (req, res) => {
@@ -59,5 +61,42 @@ export const registerUser = async (req, res) => {
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: 'Server error, please try again later' }); // 500 for server issues
+  }
+};
+
+export const googleOAuth = async (req, res) => {
+  const { tokenId } = req.body;
+
+  try {
+      const ticket = await client.verifyIdToken({
+          idToken: tokenId,
+          audience: process.env.GOOGLE_CLIENT_ID,
+      });
+
+      const { email } = ticket.getPayload();
+
+      // Check if the email already exists
+      const existingUser = await User.findOne({ email });
+      if (existingUser) {
+          return res.status(200).json({
+              message: 'Login successful',
+              user: { id: existingUser._id, email: existingUser.email },
+          });
+      }
+
+      // Create a new user
+      const newUser = new User({
+          email,
+      });
+
+      await newUser.save();
+
+      return res.status(201).json({
+          message: 'User registered successfully',
+          user: { id: newUser._id, email: newUser.email },
+      });
+  } catch (err) {
+      console.error(err);
+      return res.status(500).json({ message: 'Server error, please try again later' });
   }
 };
