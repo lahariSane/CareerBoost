@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs'; // If using bcrypt to hash passwords
 import User from '../models/User.js'; // Assuming you have a User model to interact with MongoDB
 import { client } from '../utils/googleOAuth.js'; // Google OAuth client
 
+
 // Login Controller
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -62,7 +63,6 @@ export const registerUser = async (req, res) => {
     return res.status(500).json({ message: 'Server error, please try again later' }); // 500 for server issues
   }
 };
-
 
 export const googleOAuth = async (req, res) => {
   const { tokenId } = req.body;

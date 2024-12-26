@@ -127,7 +127,9 @@ const Signup = () => {
 
       {/* Google and GitHub Sign-Up Buttons */}
       <div className="w-full flex flex-col justify-between items-center mt-4">
+
         <GoogleLogin onSuccess={handleGoogleSignup} onFailure={(error) => setError(error)} />
+
         <button
           type="button"
           onClick={handleGitHubSignup}
