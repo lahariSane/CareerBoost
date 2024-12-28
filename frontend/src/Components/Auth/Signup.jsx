@@ -3,7 +3,7 @@ import { Divider } from "@mui/material";
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 
-const Signup = () => {
+const Signup = ({ onSignupComplete }) => {
   // State variables for loading, errors, and user input fields
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -20,11 +20,18 @@ const Signup = () => {
 
     try {
       // Make the POST request for signing up
-      const response = await axios.post(`${process.env.REACT_APP_API}/auth/register`, {
+      // const response = await axios.post(`${process.env.REACT_APP_API}/auth/register`, {
+      //   name,
+      //   email,
+      //   password,
+      // })
+      const response = await axios.post(`${process.env.REACT_APP_API}/auth/sendotp`, {
         name,
         email,
         password,
       });
+      if(onSignupComplete) onSignupComplete();
+      localStorage.setItem('token', response.data.token);
 
       // Handle successful signup (e.g., display success message, navigate to login, etc.)
       setLoading(false);

@@ -10,11 +10,18 @@ const userSchema = new mongoose.Schema({
   },
   username: {
     type: String,
+    default:"",
   },
   githubId: {
     type: String,
-    unique: true, // Optional, but ensures no two users have the same GitHub ID
+    default: "",
   },
+  otp: { 
+    type: String 
+  }, // Store the hashed OTP
+  otpExpiresAt: { 
+    type: Date 
+  }, // Expiration time
 });
 
 const User = mongoose.model('User', userSchema);

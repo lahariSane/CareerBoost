@@ -2,6 +2,9 @@ import bcrypt from 'bcryptjs'; // If using bcrypt to hash passwords
 import User from '../models/User.js'; // Assuming you have a User model to interact with MongoDB
 import { client } from '../utils/googleOAuth.js'; // Google OAuth client
 import axios from 'axios'; // For making HTTP requests
+import nodemailer from 'nodemailer'; // For sending emails
+import { generateOTP, hashOTP, verifyOTP } from '../utils/otpGenerator.js'; // OTP generator functions
+import { generateToken } from '../utils/jwtTokenGenerator.js';
 
 
 // Login Controller
@@ -25,10 +28,11 @@ export const loginUser = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' }); // 401 for incorrect password
     }
 
+    const token = generateToken(user);
     // Send success response
     return res.status(200).json({
       message: 'Login successful',
-      user: { id: user._id, email: user.email }, // Return some user info if needed
+      token,
     });
   } catch (err) {
     console.error(err);
@@ -58,10 +62,12 @@ export const registerUser = async (req, res) => {
 
     await newUser.save();
 
+    const token = generateToken(newUser);
+
     // Send success response
     return res.status(201).json({
       message: 'User registered successfully',
-      user: { id: newUser._id, email: newUser.email }, // Return some user info if needed
+      token, // Return some user info if needed
     });
   } catch (err) {
     console.error(err);
@@ -96,9 +102,11 @@ export const googleOAuth = async (req, res) => {
 
     await newUser.save();
 
+    const token = generateToken(newUser);
+
     return res.status(201).json({
       message: 'User registered successfully',
-      user: { id: newUser._id, email: newUser.email },
+      token,
     });
   } catch (err) {
     console.error(err);
@@ -108,7 +116,6 @@ export const googleOAuth = async (req, res) => {
 
 export const githubOAuth = async (req, res) => {
   const { code } = req.query;
-  console.log(code);
 
   try {
     // Step 1: Exchange the code for an access token
@@ -140,13 +147,10 @@ export const githubOAuth = async (req, res) => {
     });
 
     let { email, id: githubId, login: username } = userResponse.data;
-    console.log(email, githubId, username);
 
     let user = email
       ? await User.findOne({ email })
       : await User.findOne({ githubId });
-
-      console.log(user);
 
     // Step 3: Check if the user already exists in the database
     if (user) {
@@ -157,20 +161,22 @@ export const githubOAuth = async (req, res) => {
         await user.save();
       }
 
+      const token = generateToken(user);
+
       return res.status(200).json({
         message: 'Login successful',
-        user: { id: user._id, email: user.email, username: user.username, access_token: accessToken },
+        token,
+        // user: { id: user._id, email: user.email, username: user.username, access_token: accessToken },
       });
     }
 
     // Step 4: If email is missing or user does not exist, create a new user
     user = new User({
-      email: email || username+"@github.com", // Store `null` if email is not provided
+      email: email || username + "@github.com", // Store `null` if email is not provided
       username,
       githubId, // Store GitHub-specific user ID
     });
 
-    console.log(user);
 
     await user.save();
 
@@ -183,3 +189,189 @@ export const githubOAuth = async (req, res) => {
     return res.status(500).json({ message: 'Server error, please try again later' });
   }
 };
+
+
+// export const sendOTP = async (req, res) => {
+//   const { email } = req.body;
+
+//   try {
+//     const user = await User.findOne({ email });
+//     if (!user) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     // Generate OTP
+//     const otp = generateOTP();
+//     const hashedOTP = await hashOTP(otp);
+
+//     // Save OTP and expiration time
+//     user.otp = hashedOTP;
+//     user.otpExpiresAt = new Date(Date.now() + 5 * 60 * 1000); // Valid for 5 minutes
+//     await user.save();
+
+//     // Send OTP via email
+//     const transporter = nodemailer.createTransport({
+//       service: 'gmail',
+//       auth: {
+//         user: process.env.EMAIL, // Your email
+//         pass: process.env.EMAIL_PASSWORD, // Your email password
+//       },
+//     });
+
+//     await transporter.sendMail({
+//       from: process.env.EMAIL,
+//       to: email,
+//       subject: 'Your OTP Code',
+//       text: `Your OTP code is ${otp}. It is valid for 5 minutes.`,
+//     });
+
+//     return res.status(200).json({ message: 'OTP sent successfully' });
+//   } catch (err) {
+//     console.error(err);
+//     return res.status(500).json({ message: 'Server error, please try again later' });
+//   }
+// };
+
+export const sendOTP = async (req, res) => {
+  const { name, email, password } = req.body;
+
+  try {
+    // Check if the user exists
+    let user = await User.findOne({ email });
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    if (!user) {
+      // If user doesn't exist, create a new one
+      user = new User({
+        email,
+        username: name,
+        password: hashedPassword,
+        otp: null, // Placeholder for OTP
+        otpExpiresAt: null, // Placeholder for OTP expiration
+      });
+
+      await user.save();
+
+      // Generate OTP
+      const otp = generateOTP();
+      const hashedOTP = await hashOTP(otp);
+
+      // Save OTP and expiration time
+      user.otp = hashedOTP;
+      user.otpExpiresAt = new Date(Date.now() + 5 * 60 * 1000); // Valid for 5 minutes
+      await user.save();
+
+      const token = generateToken(user);
+
+      // Send OTP via email
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: process.env.EMAIL, // Your email
+          pass: process.env.EMAIL_PASSWORD, // Your email password
+        },
+      });
+
+      await transporter.sendMail({
+        from: process.env.EMAIL,
+        to: email,
+        subject: 'Your OTP Code',
+        text: `Your OTP code is ${otp}. It is valid for 5 minutes.`,
+      });
+
+      return res.status(200).json({ message: 'OTP sent successfully', token: token });
+    }
+    else if (user.githubId) {
+      return res.status(400).json({ message: 'User signed up with GitHub. Please login with GitHub' });
+    }
+
+    else if (user.otp && new Date() < user.otpExpiresAt) {
+      return res.status(400).json({ message: 'OTP already sent. Please check your email' });
+    }
+    else {
+      return res.status(400).json({ message: 'User already exists' });
+    }
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Server error, please try again later' });
+  }
+};
+
+export const verifyOTPCode = async (req, res) => {
+  const { otp } = req.body;
+  const { email } = req.user;
+
+  try {
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Check if OTP is expired
+    if (!user.otp || new Date() > user.otpExpiresAt) {
+      return res.status(400).json({ message: 'OTP expired or not found' });
+    }
+
+    // Verify OTP
+    const isMatch = await verifyOTP(otp, user.otp);
+    if (!isMatch) {
+      return res.status(400).json({ message: 'Invalid OTP' });
+    }
+
+    // OTP verified successfully
+    // Clear OTP fields after verification
+    user.otp = null;
+    user.otpExpiresAt = null;
+    await user.save();
+
+    return res.status(200).json({ message: 'OTP verified successfully' });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Server error, please try again later' });
+  }
+};
+
+
+export const resendOTP = async (req, res) => {
+  const { email } = req.user;
+
+  let user = await User.findOne({ email });
+  if (!user) {
+    return res.status(400).json({ message: 'User not found' });
+  }
+
+  if(!user.otp){
+    return res.status(400).json({message: "Email verified already"});
+  }
+
+  const otp = generateOTP();
+  const hashedOTP = await hashOTP(otp);
+  try {
+    user.otp = hashedOTP;
+    user.otpExpiresAt = new Date(Date.now() + 5 * 60 * 1000); // Valid for 5 minutes
+    await user.save();
+
+    const token = generateToken(user);
+
+    // Send OTP via email
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL, // Your email
+        pass: process.env.EMAIL_PASSWORD, // Your email password
+      },
+    });
+
+    await transporter.sendMail({
+      from: process.env.EMAIL,
+      to: email,
+      subject: 'Your OTP Code',
+      text: `Your OTP code is ${otp}. It is valid for 5 minutes.`,
+    });
+
+    return res.status(200).json({ message: 'OTP sent successfully', token: token });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Server error, please try again later' });
+  }
+}

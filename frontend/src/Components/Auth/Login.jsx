@@ -24,6 +24,8 @@ const Login = () => {
         password,
       });
 
+      localStorage.setItem('token', response.data.token);
+
       // Handle successful login (you can save the token or user info in the state or localStorage)
       setLoading(false); // Set loading state to false after the response is received
       alert("Login successful");
