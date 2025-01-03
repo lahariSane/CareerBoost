@@ -8,6 +8,7 @@ body {
   font-family: 'Arial', sans-serif;
   color: #333;
   z-index: 0;
+  width: 100vw;
   overflow-x: hidden;
 }
 
@@ -45,21 +46,21 @@ body::-webkit-scrollbar {
 .landing-page-header-subpart {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content:flex-end;
   width: 17vw;
   padding-top: 2vw;
-  padding-right: 2vw;
   opacity: 0;
   animation: slideDown 0.5s ease-out forwards;
   animation-delay: 1.8s;
+  padding-right: 2vw;
 }
 
 .landing-page-header-subpart button {
-  width: 7vw;
+  width: auto;
   color: #333;
   padding: 1vw;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: large;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -95,7 +96,7 @@ body::-webkit-scrollbar {
 .Hero-section h2 {
   color: #75636c;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 1.8rem;
+  font-size: 2vw;
   font-weight: bold;
   opacity: 0;
   animation: slideUp 1s ease-out forwards; 
@@ -117,7 +118,7 @@ body::-webkit-scrollbar {
 
 .resume-templates img {
   position: absolute; /* Positioning the images relative to the parent */
-  max-width: 30%; /* All images take up a third of the container width */
+  max-width: 30vw; /* All images take up a third of the container width */
   height: auto; /* Maintain aspect ratio */
   border-radius: 10px; /* Optional: Rounded corners */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Optional: Shadow effect */
@@ -175,7 +176,7 @@ body::-webkit-scrollbar {
   padding-right: 2vw;
   color: #75636c;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.7vw;
   font-weight: bold;
   width: 70vw;
 }
@@ -186,10 +187,14 @@ body::-webkit-scrollbar {
   justify-content:center;
   color: #75636c;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 1500%;
+  font-size: 15vw;
   font-weight: bold;
   width: 30vw;
   margin-left: -10vw;
+}
+
+.cover-letter-block {
+  font-size: 4.7vw;
 }
 
 .Jobmatch-analysis{
@@ -220,7 +225,7 @@ body::-webkit-scrollbar {
 .Jobmatch-analysis-text {
   color: #e9ded4;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 1.7rem;
+  font-size: 2vw;
   font-weight: bold;
   padding-right: 3vw;
   display: flex;
@@ -243,7 +248,7 @@ body::-webkit-scrollbar {
   justify-content:space-evenly;
   color: #75636c;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.5vw;
   font-weight: bold;
   width: 70vw;
 }
@@ -262,7 +267,7 @@ body::-webkit-scrollbar {
 .Progress-tracking {
   background-color: #b38d72;
   width: 52vw;
-  height: 20vh;
+  height: 23vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -276,7 +281,7 @@ body::-webkit-scrollbar {
   align-items: center;
   color:#e9ded4;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.5vw;
   font-weight: bold;
 }
 
@@ -376,5 +381,70 @@ body::-webkit-scrollbar {
     transform: translateY(0);
   }
 }
+
+
+/* General responsive adjustments for smaller screens */
+@media (max-width: 1200px) {
+ .Hero-section {
+  height: 50vw;
+ }
+ 
+ .ATS-Score {
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 20px;
+ }
+
+ .Jobmatch-graph {
+  height: auto;
+  width: 30vw;
+ }
+
+ .Jobmatch-analysis {
+  flex-direction: column-reverse;
+  justify-content: space-evenly;
+ }
+
+ .Interview {
+  flex-direction: column;
+  align-items: center;
+ }
+
+ .Interview-text {
+  height: 100%;
+  justify-content: space-evenly;
+ }
+ .Interview-illustartion {
+  display: none;
+ }
+ 
+}
+
+/* Tablet devices */
+@media (max-width: 768px) {
+  .Hero-section {
+    height: 60vw;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-links, .footer-contact, .footer-socials {
+    padding: 20px;
+  }
+
+  .Jobmatch-analysis-illustration {
+    display: none;
+  }
+}
+
+
+
+
+
+
 
 

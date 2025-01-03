@@ -1,17 +1,20 @@
 import React from 'react';
-import '../styles/LandingPage.css'; 
-import { ContainerScroll } from './container-scroll-animation';
-import { TypewriterEffectSmooth } from './HeroSection';
-import resume6 from '../assests/resume6.png'
-import resume2 from '../assests/resume2.png'
-import resume3 from '../assests/resume3.png'
-import interviewimg1 from '../assests/interviewimg1.png'
-import ATSScoreSection from './ATSScore';
-import Jobmatchsection from './JobMatch';
-import Footer from '../Layout/Footer';
-import coverletter from '../assests/coverletter.png'
+import '../Components/LandingPage/styles/LandingPage.css'; 
+import { ContainerScroll } from '../Components/LandingPage/container-scroll-animation';
+import { TypewriterEffectSmooth } from '../Components/LandingPage/HeroSection';
+import resume6 from '../Assests/resume6.png'
+import resume2 from '../Assests/resume2.png'
+import resume3 from '../Assests/resume3.png'
+import interviewimg1 from '../Assests/interviewimg1.png'
+import ATSScoreSection from '../Components/LandingPage/ATSScore';
+import Jobmatchsection from '../Components/LandingPage/JobMatch';
+import Footer from '../Components/Layout/Footer';
+import coverletter from '../Assests/coverletter.png';
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
+
+  const navigate = useNavigate(); // React Router hook
 
   return (
     <div className="landing-page">
@@ -20,8 +23,8 @@ const LandingPage = () => {
           <p>CAREER BOOST</p>
         </div>
         <div className='landing-page-header-subpart'>
-          <button>LOG IN</button>
-          <button>SIGN UP</button>
+        <button onClick={() => navigate('/login')}>LOG IN</button>
+          {/* <button>SIGN UP</button> */}
         </div>
       </section>
 

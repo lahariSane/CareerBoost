@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import '../styles/LandingPage.css'; 
+import './styles/LandingPage.css'; 
 
 const ATSScoreSection = () => {
   const sectionRef = useRef(null);

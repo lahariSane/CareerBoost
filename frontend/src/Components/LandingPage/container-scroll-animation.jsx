@@ -78,8 +78,8 @@ export const Header = ({
       }}
       className="max-w-5xl mx-auto text-center"
     >
-      <h1 className="text-5xl md:text-7xl font-extrabold text-black">
-        <span className="block">PERSONALIZED COVER LETTERS IN MINUTES !!!</span>
+      <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-black text-center leading-tight">
+        <span className="cover-letter-block">PERSONALIZED COVER LETTERS IN MINUTES !!!</span>
       </h1>
     </motion.div>
   );
