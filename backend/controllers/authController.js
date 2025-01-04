@@ -92,6 +92,11 @@ export const resetPasswordRequest = async (req, res) => {
       expiresIn: '1h', // Token valid for 1 hour
     });
 
+    // Save the reset token and expiration time
+    user.resetToken = resetToken;
+    user.resetTokenExpiresAt = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+    await user.save();
+
     // Send the reset password link to the user's email
   
     const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
@@ -128,6 +133,9 @@ export const resetPassword = async (req, res) => {
     const user = await User.findOne({ email: email });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
+    }
+    else if (!user.resetToken || new Date() > user.resetTokenExpiresAt) {
+      return res.status(400).json({ message: 'Invalid or expired reset token' });
     }
 
     // Hash the new password

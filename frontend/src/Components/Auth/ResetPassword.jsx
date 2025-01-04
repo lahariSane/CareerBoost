@@ -1,107 +1,150 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom"; // To access URL query parameters
+import { useParams, useNavigate } from "react-router-dom";
 
-const ResetPassword = () => {
-    const { token } = useParams(); // Get token from URL
-    // const [token, setToken] = useState(""); // State to store token from URL
-    const [newPassword, setNewPassword] = useState(""); // State for new password
-    const [confirmPassword, setConfirmPassword] = useState(""); // State for confirming password
-    const [error, setError] = useState(""); // State for error messages
-    const [success, setSuccess] = useState(false); // State to track success
-    const [loading, setLoading] = useState(false); // State for loading spinner
-
-    // useEffect(() => {
-    //     // Extract the token from the URL query parameters
-    //     console.log(location.search);
-    //     const queryParams = new URLSearchParams(location.search);
-    //     const tokenFromUrl = queryParams.get("token");
-    //     setToken(tokenFromUrl); // Set token in state
-    // }, [location]);
+export default function ResetPassword() {
+    const { token } = useParams();
+    const navigate = useNavigate(); // For navigation
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState(false);
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
 
-        // Ensure both passwords match
         if (newPassword !== confirmPassword) {
             setError("Passwords do not match.");
             return;
         }
 
         setLoading(true);
-        setError(""); // Clear any previous error messages
+        setError("");
 
         try {
-            // Make API call to reset password with the token
             const response = await axios.post(
                 `${process.env.REACT_APP_API}/auth/updatepassword`,
                 { newPassword },
-                { headers: { Authorization: `Bearer ${token}` } } // Send token in the header
+                { headers: { Authorization: `Bearer ${token}` } }
             );
 
-            setSuccess(true); // Set success state to true upon successful password reset
+            setSuccess(true);
+            setTimeout(() => {
+                navigate("/login"); // Redirect to login page
+            }, 1000); // Redirect after 2 seconds to allow message display
         } catch (err) {
             setError(err.response?.data?.message || "Something went wrong.");
         } finally {
-            setLoading(false); // Reset loading state
+            setLoading(false);
         }
     };
 
     return (
-        <div className="space-y-4 max-w-md mx-auto">
-            {success ? (
-                <div className="text-center">
-                    <h2 className="text-xl font-semibold text-green-500">
-                        Your password has been reset successfully!
-                    </h2>
+        <div style={styles.resetPage}>
+            <form style={styles.resetForm} onSubmit={handleResetPassword}>
+                <div style={styles.formGroup}>
+                    <label htmlFor="new-password" style={styles.formLabel}>
+                        New Password
+                    </label>
+                    <input
+                        type="password"
+                        id="new-password"
+                        style={styles.formInput}
+                        value={newPassword}
+                        onChange={(e) => setNewPassword(e.target.value)}
+                        required
+                    />
                 </div>
-            ) : (
-                <form onSubmit={handleResetPassword} className="space-y-4">
-                    {/* New Password Field */}
-                    <div>
-                        <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700">
-                            New Password
-                        </label>
-                        <input
-                            type="password"
-                            id="newPassword"
-                            value={newPassword}
-                            onChange={(e) => setNewPassword(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
 
-                    {/* Confirm Password Field */}
-                    <div>
-                        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-                            Confirm New Password
-                        </label>
-                        <input
-                            type="password"
-                            id="confirmPassword"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            required
-                        />
-                    </div>
+                <div style={styles.formGroup}>
+                    <label htmlFor="confirm-password" style={styles.formLabel}>
+                        Confirm Password
+                    </label>
+                    <input
+                        type="password"
+                        id="confirm-password"
+                        style={styles.formInput}
+                        value={confirmPassword}
+                        onChange={(e) => setConfirmPassword(e.target.value)}
+                        required
+                    />
+                </div>
 
-                    {/* Error Message */}
-                    {error && <p className="text-red-500 text-sm">{error}</p>}
-
-                    {/* Reset Password Button */}
-                    <button
-                        type="submit"
-                        className="w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-                        disabled={loading} // Disable button when loading
-                    >
-                        {loading ? "Processing..." : "Reset Password"}
-                    </button>
-                </form>
-            )}
+                <button
+                    type="submit"
+                    style={styles.resetButton}
+                    disabled={loading}
+                >
+                    {loading ? "Resetting..." : "Reset Password"}
+                </button>
+                <div style={styles.messageContainer}>
+                    {error && <p style={styles.errorMessage}>{error}</p>}
+                    {success && <p style={styles.successMessage}>Password reset successfully! Redirecting to login...</p>}
+                </div>
+            </form>
         </div>
     );
-};
+}
 
-export default ResetPassword;
+const styles = {
+    resetPage: {
+        minHeight: "10vh",
+        display: "flex",
+        justifyContent: "center",
+        padding: "0.25rem",
+        fontFamily: "Arial, sans-serif",
+        fontSize: "14px",
+        flexWrap: "wrap",
+        borderRadius: "8px",
+        width: "100%",
+        maxWidth: "1000px",
+        overflow: "hidden",
+        flexDirection: "column",
+    },
+    resetForm: {
+        display: "flex",
+        flexDirection: "column",
+    },
+    formGroup: {
+        marginBottom: "1rem",
+    },
+    formLabel: {
+        display: "block",
+        fontSize: "14px",
+        color: "#444444",
+        marginBottom: "0.5rem",
+    },
+    formInput: {
+        width: "100%",
+        padding: "0.5rem",
+        border: "1px solid #4a3e36",
+        borderRadius: "6px",
+        fontSize: "14px",
+        boxSizing: "border-box",
+    },
+    resetButton: {
+        padding: "0.5rem",
+        backgroundColor: "#B38d72",
+        fontSize: "16px",
+        border: "none",
+        borderRadius: "6px",
+        cursor: "pointer",
+        textAlign: "center",
+        marginTop: "1rem",
+        width: "150px",
+        margin: "0 auto",
+    },
+    messageContainer: {
+        marginTop: "1rem",
+        textAlign: "center",
+    },
+    errorMessage: {
+        color: "red",
+        fontSize: "14px",
+    },
+    successMessage: {
+        color: "green",
+        fontSize: "14px",
+    },
+};
