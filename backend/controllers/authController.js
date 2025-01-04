@@ -5,6 +5,7 @@ import axios from 'axios'; // For making HTTP requests
 import nodemailer from 'nodemailer'; // For sending emails
 import { generateOTP, hashOTP, verifyOTP } from '../utils/otpGenerator.js'; // OTP generator functions
 import { generateToken } from '../utils/jwtTokenGenerator.js';
+import jwt from 'jsonwebtoken'; // For generating JWTs
 
 
 // Login Controller
@@ -72,6 +73,74 @@ export const registerUser = async (req, res) => {
   } catch (err) {
     console.error(err);
     return res.status(500).json({ message: 'Server error, please try again later' }); // 500 for server issues
+  }
+};
+
+export const resetPasswordRequest = async (req, res) => {
+  console.log(req.body);
+  const { email } = req.body;
+
+  try {
+    // Check if the user exists
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Generate a reset password token (JWT)
+    const resetToken = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {
+      expiresIn: '1h', // Token valid for 1 hour
+    });
+
+    // Send the reset password link to the user's email
+  
+    const resetLink = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL, // Your email
+        pass: process.env.EMAIL_PASSWORD, // Your email password
+      },
+    });
+
+    await transporter.sendMail({
+      from: process.env.EMAIL,
+      to: email,
+      subject: 'Password Reset Request',
+      text: `Click the following link to reset your password: ${resetLink}. The link is valid for 1 hour.`,
+    });
+
+    return res.status(200).json({ message: 'Password reset link sent successfully' });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: 'Server error, please try again later' });
+  }
+};
+
+// Reset Password Controller - Updates the password after validating the reset token
+export const resetPassword = async (req, res) => {
+  const { newPassword } = req.body;
+  const { email } = req.user;
+
+  try {
+    // Find the user by the email decoded from the token
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update the user's password
+    user.password = hashedPassword;
+    await user.save();
+
+    return res.status(200).json({ message: 'Password reset successfully' });
+  } catch (err) {
+    console.error(err);
+    return res.status(400).json({ message: 'Invalid or expired reset token' });
   }
 };
 
@@ -190,48 +259,6 @@ export const githubOAuth = async (req, res) => {
   }
 };
 
-
-// export const sendOTP = async (req, res) => {
-//   const { email } = req.body;
-
-//   try {
-//     const user = await User.findOne({ email });
-//     if (!user) {
-//       return res.status(404).json({ message: 'User not found' });
-//     }
-
-//     // Generate OTP
-//     const otp = generateOTP();
-//     const hashedOTP = await hashOTP(otp);
-
-//     // Save OTP and expiration time
-//     user.otp = hashedOTP;
-//     user.otpExpiresAt = new Date(Date.now() + 5 * 60 * 1000); // Valid for 5 minutes
-//     await user.save();
-
-//     // Send OTP via email
-//     const transporter = nodemailer.createTransport({
-//       service: 'gmail',
-//       auth: {
-//         user: process.env.EMAIL, // Your email
-//         pass: process.env.EMAIL_PASSWORD, // Your email password
-//       },
-//     });
-
-//     await transporter.sendMail({
-//       from: process.env.EMAIL,
-//       to: email,
-//       subject: 'Your OTP Code',
-//       text: `Your OTP code is ${otp}. It is valid for 5 minutes.`,
-//     });
-
-//     return res.status(200).json({ message: 'OTP sent successfully' });
-//   } catch (err) {
-//     console.error(err);
-//     return res.status(500).json({ message: 'Server error, please try again later' });
-//   }
-// };
-
 export const sendOTP = async (req, res) => {
   const { name, email, password } = req.body;
 
@@ -340,8 +367,8 @@ export const resendOTP = async (req, res) => {
     return res.status(400).json({ message: 'User not found' });
   }
 
-  if(!user.otp){
-    return res.status(400).json({message: "Email verified already"});
+  if (!user.otp) {
+    return res.status(400).json({ message: "Email verified already" });
   }
 
   const otp = generateOTP();

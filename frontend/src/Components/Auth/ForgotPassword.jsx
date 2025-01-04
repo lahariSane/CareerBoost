@@ -1,13 +1,26 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false); // New state for loading
 
-  const handleForgotPassword = (e) => {
+  const handleForgotPassword = async (e) => {
     e.preventDefault();
-    // Simulate API call or password reset logic
-    setSuccess(true);
+    setLoading(true); // Set loading to true when the request starts
+
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_API}/auth/resetpassword`, {
+        email,
+      });
+      setSuccess(true); // Set success to true after a successful response
+    } catch (error) {
+      console.error("Error sending reset password email", error);
+      setSuccess(false); // Optionally handle errors
+    } finally {
+      setLoading(false); // Set loading to false after the request completes
+    }
   };
 
   return (
@@ -30,8 +43,13 @@ const ForgotPassword = () => {
           <button
             type="submit"
             className="w-1/2 py-2 px-4 bg-secondary-beige text-tertiary-dark rounded-md hover:bg-secondary-darkBeige"
+            disabled={loading} // Disable the button while loading
           >
-            Reset Password
+            {loading ? (
+              <span className="loader">Loading...</span> // Placeholder text for the loading state
+            ) : (
+              "Reset Password"
+            )}
           </button>
         </form>
       ) : (
