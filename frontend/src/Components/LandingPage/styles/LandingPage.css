@@ -460,6 +460,14 @@ body::-webkit-scrollbar {
   .Jobmatch-analysis-illustration {
     display: none;
   }
+
+  .landing-page-header-logo p {
+    font-size:xx-small;
+  }
+
+  .landing-page-header-subpart button {
+    font-size: xx-small;
+  }
 }
 
 
