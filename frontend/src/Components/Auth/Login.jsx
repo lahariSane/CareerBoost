@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState} from "react";
+import { useNavigate } from "react-router-dom";
 import { Divider } from "@mui/material";
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
@@ -10,6 +11,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [rerender, setRerender] = useState(false);
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,7 +30,7 @@ const Login = () => {
 
       // Handle successful login (you can save the token or user info in the state or localStorage)
       setLoading(false); // Set loading state to false after the response is received
-      alert("Login successful");
+      navigate("/");
 
       // Redirect or further actions after successful login, e.g., navigating to another page
     } catch (err) {
@@ -53,7 +55,7 @@ const Login = () => {
         });
 
         // Handle successful login (you can save the token or user info in the state or localStorage)
-        alert("Login successful");
+        navigate("/");
 
         // Redirect or further actions after successful login, e.g., navigating to another page
       } catch (err) {

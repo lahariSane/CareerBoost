@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const OTPVerification = ({ email }) => {
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [resendLoading, setResendLoading] = useState(false);
+  const navigate = useNavigate();
 
   // Handle OTP input change
   const handleChange = (value, index) => {
@@ -33,8 +35,6 @@ const OTPVerification = ({ email }) => {
       try {
         setLoading(true);
         setError(""); // Reset error before submitting
-        // Call the API to verify the OTP
-        console.log("OTP Submitted: ", finalOtp);
         const response = await axios.post(
           `${process.env.REACT_APP_API}/auth/verifyotp`,
           { otp: finalOtp },
@@ -44,7 +44,7 @@ const OTPVerification = ({ email }) => {
             },
           }
         );
-        console.log("OTP verification success", response.data);
+        navigate("/");
         // Handle success logic here (e.g., navigate or show success message)
       } catch (err) {
         console.error(err);
