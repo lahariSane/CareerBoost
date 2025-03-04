@@ -202,6 +202,19 @@ body::-webkit-scrollbar {
   width: 70vw;
 }
 
+.ATS-Score-button {
+  width: 13vw;
+  color: #e9ded4;
+  padding: 1vw;
+  font-weight: bolder;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  margin-top: 2vh;
+  background-color: #75636c;
+  border-radius: 0.5vw;
+}
+
 .ATS-Score-illustration {
   display: flex;
   flex-direction: column;

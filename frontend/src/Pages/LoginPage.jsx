@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Login from "../Components/Auth/Login";
 import Signup from "../Components/Auth/Signup";
 import ForgotPassword from "../Components/Auth/ForgotPassword";
@@ -11,6 +11,7 @@ import careerboostlogo from '../Assests/careerboostlogo.png';
 const LoginPage = () => {
     const [authState, setAuthState] = useState("login"); // "login", "signup", "forgotPassword", "otpVerification", "resetPassword"
     const location = useLocation(); // To access the current URL
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Check the path and update authState only when the URL changes
@@ -22,6 +23,15 @@ const LoginPage = () => {
         }
     }, [location]); // This will run when the URL changes
 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        const redirectPath = sessionStorage.getItem("redirectAfterLogin");
+        if (token && redirectPath) {
+            sessionStorage.removeItem("redirectAfterLogin");
+            navigate(redirectPath);
+        }
+    }, [navigate]);
+    
     const renderAuthComponent = () => {
         switch (authState) {
             case "login":

@@ -1,0 +1,50 @@
+/* Resume Results Page */
+.resume-results-container {
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Score Section */
+  .score-section {
+    background: #e3f2fd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .score-section h2 {
+    color: #007bff;
+  }
+  
+  /* Suggestions Section */
+  .suggestions-section {
+    background: #fff3cd;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .suggestions-section h2 {
+    color: #856404;
+  }
+  
+  /* Back Button */
+  .back-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .back-btn:hover {
+    background-color: #0056b3;
+  }
+  

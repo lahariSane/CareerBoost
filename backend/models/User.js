@@ -28,6 +28,10 @@ const userSchema = new mongoose.Schema({
   resetTokenExpiresAt: {
     type: Date,
   },
+  resumeLink: {
+    type: String,
+    default:"",
+  },
 });
 
 const User = mongoose.model('User', userSchema);

@@ -1,10 +1,21 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 import './styles/LandingPage.css'; 
 
 const ATSScoreSection = () => {
+  const navigate = useNavigate();
   const sectionRef = useRef(null);
   const [score, setScore] = useState(0);
+  
+  const handleTestScoreClick = () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/Res-Upload');
+    } else {
+      navigate('/login', { state: { from: '/Res-Upload' } });
+    }
+  };
 
 
   // Framer Motion hooks for scroll-based animations
@@ -48,6 +59,7 @@ const ATSScoreSection = () => {
         <h2>Let AI Perfect Your Resume!</h2>
         <p>Our AI analyzes your resume to provide actionable feedback</p>
         <p>Stand out in the recruiter’s pile with precision-crafted resumes</p>
+        <button className="ATS-Score-button" onClick={handleTestScoreClick}>TEST SCORE </button>
       </div>
       <div className="ATS-Score-illustration">
         <p>{score}</p>

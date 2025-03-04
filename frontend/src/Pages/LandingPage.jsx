@@ -18,6 +18,8 @@ const LandingPage = () => {
   const [showSplash, setShowSplash] = useState(true);
   const navigate = useNavigate();
 
+
+
   return (
     <div className="landing-page">
       {showSplash ? (

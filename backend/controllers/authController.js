@@ -342,6 +342,7 @@ export const verifyOTPCode = async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
+
     // Check if OTP is expired
     if (!user.otp || new Date() > user.otpExpiresAt) {
       return res.status(400).json({ message: 'OTP expired or not found' });
