@@ -52,11 +52,13 @@ const LoginPage = () => {
     return (
         <div className="flex min-h-screen bg-primary items-center justify-center">
             {/* Logo */}
-            <div className="absolute top-4 left-4">
+            <div 
+                className="flex items-baseline justify-center absolute top-4 left-8"
+                onClick={() => navigate("/")}>
                 <img
-                     src={careerboostlogo}
+                    src={careerboostlogo}
                     alt="Logo"
-                    className="h-10"
+                    className="h-20 w-20 cursor-pointer"
                 />
             </div>
             <div className="relative w-[70%] flex items-center justify-center bg-primary-light rounded-2xl h-[650px] shadow-2xl">
