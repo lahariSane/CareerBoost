@@ -17,7 +17,7 @@ const Footer = () => {
             </div>
             <div className="footer-contact">
               <h3>Contact Us</h3>
-              <p>Email: support@careerboost.com</p>
+              <p>Email: careerboost.connect@gmail.com</p>
               <p>Phone: +123 456 7890</p>
               <p>Address: 123 Gyan Circle, Sri City</p>
             </div>
@@ -31,7 +31,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>&copy; 2024 Career Boost. All Rights Reserved.</p>
+            <p>&copy; 2025 Career Boost. All Rights Reserved.</p>
           </div>
     </footer>
   );

@@ -7,6 +7,9 @@ const router = express.Router();
 const upload = multer({ dest: "uploads/" });
 
 router.post("/upload",authenticateToken, upload.single("resume"), uploadResume);
+router.get("/upload", (req, res) => {
+  res.send("Hello from Resume Routes!");
+});
 
 
 export default router;

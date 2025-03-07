@@ -2,7 +2,6 @@
 import React, { useRef } from "react";
 import { useScroll, useTransform, motion } from "framer-motion";
 
-
 // ContainerScroll Component
 export const ContainerScroll = ({
   titleComponent,

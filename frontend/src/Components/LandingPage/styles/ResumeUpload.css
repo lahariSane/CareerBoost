@@ -1,12 +1,48 @@
 /* Container */
+
+.ResumeUpload-container {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    width: 100vw;
+    background-color: white;
+}
+
+.Sub-Container {
+  display: flex;
+  flex-direction: row;
+  background-color: #e9ded4;
+  background-image: url(../../../Assests/ResumeUploadPagebg.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.TextReveal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    background-color: none;
+    margin: 5vw;
+    color: #4e342e;
+    font-size: 3rem;
+    font-weight: bolder;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .test-score-container {
-    width: 50%;
+    height: auto;
+    width: 80%;
     margin: auto;
     text-align: center;
-    padding: 20px;
-    background: #f9f9f9;
+    margin: 5vw;
+    padding: 3vw;
+    background: #b38d72;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    animation: slideUp 1s ease;
   }
   
   /* Form Styling */
@@ -14,45 +50,175 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    gap: 5vh;
+  }
+
+  .Input1-title, .Input2-title {
+    color: #e9ded4;
+    font-size: 2rem;
+    font-weight: 700;
   }
   
   textarea, input {
     width: 80%;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #ddd;
+    border: 1px solid #e9ded4;
     font-size: 16px;
   }
+
   
-  .submit-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
+.Upload-btn {
+    background-color: #e9ded4;
+    color: #b38d72;
+    padding: 10px 20px;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
-    font-size: 18px;
+    transition: 0.3s;
   }
   
-  .submit-btn:disabled {
-    background-color: #a0a0a0;
+  .Upload-btn:hover {
+    background-color: #b38d72;
+    color: #e9ded4;
+  }
+  
+  .Upload-btn:disabled {
+    background-color: #e9ded4;
+    color: #b38d72;
     cursor: not-allowed;
   }
   
-  /* Progress Bar */
-  .progress-container {
-    width: 80%;
-    height: 10px;
-    background: #ddd;
-    border-radius: 5px;
-    margin-top: 15px;
-    overflow: hidden;
+  .Upload-btn:disabled:hover {
+    background-color: #e9ded4;
+    color: #b38d72;
   }
   
-  .progress-bar {
-    height: 100%;
-    background: #28a745;
-    transition: width 0.2s ease-in-out;
+  .Upload-btn:active {
+    transform: scale(0.95);
   }
   
+  .Upload-btn:focus {
+    outline: none;
+  }
+  
+  .Upload-btn:disabled {
+    opacity: 0.5;
+  }
+  
+  .Upload-btn:disabled:hover {
+    cursor: not-allowed;
+  }
+  
+  .Upload-btn:disabled:active {
+    transform: scale(1);
+  }
+  
+  .Upload-btn:disabled:focus {
+    outline: none;
+  }
+  
+  .Upload-btn:disabled {
+    cursor: not-allowed;
+  }
+  
+  .Upload-btn:disabled:hover {
+    cursor: not-allowed;
+  }
+  
+  .Upload-btn:disabled:active {
+    transform: scale(1);
+  }
+  
+  .Upload-btn:disabled:focus {
+    outline: none;
+  }
+  
+  .Upload-btn:disabled {
+    cursor: not-allowed;
+  }
+  
+  .Upload-btn:disabled:hover {
+    cursor: not-allowed;
+  }
+  
+  .Upload-btn:disabled:active {
+    transform: scale(1);
+  }
+  
+  .Upload-btn:disabled:focus {
+    outline: none;
+  }
+  
+  .Upload-btn:disabled {
+    cursor: not-allowed;
+  }
+  
+  .Upload-btn:disabled:hover {
+    cursor: not-allowed;
+  }
+  
+  .Upload-btn:disabled:active {
+    transform: scale(1);
+  }
+  
+  .Upload-btn:disabled:focus {
+    outline: none;
+  }
+  
+  .Upload-btn:disabled {
+    cursor: not-allowed;
+  }
+  
+  .Upload-btn:disabled:hover {
+    cursor: not-allowed;
+}
+
+
+  /* HTML: <div class="loader"></div> */
+
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 40px;
+  aspect-ratio: 1;
+  --c: linear-gradient(#000 0 0);
+  --r1: radial-gradient(farthest-side at bottom,#000 93%,#0000);
+  --r2: radial-gradient(farthest-side at top   ,#000 93%,#0000);
+  background: 
+    var(--c) ,var(--r1),var(--r2),
+    var(--c) ,var(--r1),var(--r2),
+    var(--c) ,var(--r1),var(--r2);
+  background-repeat: no-repeat;
+  animation: l2 1s infinite alternate;
+}
+@keyframes l2 {
+  0%,25% {
+    background-size: 8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
+    background-position: 0 50%,0 calc(50% - 2px),0 calc(50% + 2px),50% 50%,50% calc(50% - 2px),50% calc(50% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
+ }
+ 50% {
+    background-size: 8px 100%,8px 4px,8px 4px,8px 0,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
+    background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(50% - 2px),50% calc(50% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
+ }
+ 75% {
+    background-size: 8px 100%,8px 4px,8px 4px,8px 100%,8px 4px,8px 4px,8px 0,8px 4px,8px 4px;
+    background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(0% - 2px),50% calc(100% + 2px),100% 50%,100% calc(50% - 2px),100% calc(50% + 2px);
+ }
+ 95%,100% {
+    background-size: 8px 100%,8px 4px, 8px 4px,8px 100%,8px 4px,8px 4px,8px 100%,8px 4px,8px 4px;
+    background-position: 0 50%,0 calc(0% - 2px),0 calc(100% + 2px),50% 50%,50% calc(0% - 2px),50% calc(100% + 2px),100% 50%,100% calc(0% - 2px),100% calc(100% + 2px);
+ }
+}
+
+
+/* Animation Keyframes */
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

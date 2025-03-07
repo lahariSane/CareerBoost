@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
+const { brown } = require('@mui/material/colors');
+
 // module.exports = {
 //   content: ['./src/**/*.{js,jsx,ts,tsx}'],
 //   theme: {
@@ -25,6 +27,8 @@ module.exports = {
           blue: "#92a2ba",
           mauve: "#75636c",
           green: "#62754f",
+          brown: "#3e2723",
+          brownLight: "#4e342e",
         },
         tertiary: {
           dark: "#29282e",

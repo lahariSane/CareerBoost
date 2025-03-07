@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Components/LandingPage/styles/ResumeUpload.css";
+// import { TextReveal } from "../Components/ResUpload/TextReveal.tsx";
+// import Footer from "../Components/Layout/Footer.jsx";
 
 const ResumeUploadPage = () => {
   const [jobDescription, setJobDescription] = useState("");
   const [resume, setResume] = useState(null);
-  const [progress, setProgress] = useState(0);
+  // const [progress, setProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
   const navigate = useNavigate();
 
@@ -30,7 +32,7 @@ const ResumeUploadPage = () => {
     }
 
     setIsUploading(true);
-    setProgress(0);
+    // setProgress(0);
 
     const formData = new FormData();
     formData.append("jobDescription", jobDescription);
@@ -51,8 +53,8 @@ const ResumeUploadPage = () => {
       const data = await response.json();
       console.log("Uploaded File Link:", data.fileUrl);
 
-      setProgress(100);
-      alert("Resume uploaded successfully!");
+      // setProgress(100);
+      // alert("Resume uploaded successfully!");
       navigate("/resume-results", { state: { fileUrl: data.fileUrl, score: 85, suggestions: ["Use more keywords", "Add a summary section"] } });
     } catch (error) {
       console.error("Error uploading resume:", error);
@@ -63,12 +65,18 @@ const ResumeUploadPage = () => {
   };
 
   return (
-    <div className="test-score-container">
-      <h1>ATS Resume Score</h1>
-      <p>Upload your resume and enter the job description to analyze your ATS score.</p>
+    <div className="ResumeUpload-container">
+      <div className="Sub-Container">
+    <div className="TextReveal-container">
+      {/* <h1>Optimize Your Resume for Maximum Impact</h1> */}
+      <h1>Upload your resume and job description to analyze your ATS compatibility.</h1>
+      {/* <h1>Get an instant ATS score and expert recommendations to boost your chances of landing the job.</h1> */}
+    </div>
 
+
+    <div className="test-score-container">
       <form onSubmit={handleSubmit} className="test-score-form">
-        <label htmlFor="job-description">Enter Job Description:</label>
+        <label className="Input1-title" htmlFor="job-description">Enter Job Description</label>
         <textarea
           id="job-description"
           placeholder="Ex: Full-Stack Developer, Data Analyst..."
@@ -78,7 +86,7 @@ const ResumeUploadPage = () => {
           disabled={isUploading}
         />
 
-        <label htmlFor="resume-upload">Upload Resume (PDF/DOCX):</label>
+        <label className="Input2-title" htmlFor="resume-upload">Upload Resume (PDF)</label>
         <input
           type="file"
           id="resume-upload"
@@ -88,16 +96,22 @@ const ResumeUploadPage = () => {
           disabled={isUploading}
         />
 
-        <button type="submit" disabled={isUploading}>
-          {isUploading ? "Uploading..." : "Submit"}
+        
+        <button className="Upload-btn" type="submit" disabled={isUploading}>
+          {isUploading ? "Submit" : "Submit"}
         </button>
-      </form>
 
-      {isUploading && (
-        <div className="progress-container">
-          <div className="progress-bar" style={{ width: `${progress}%` }}></div>
+        <div className="Loader-container" >
+          {isUploading && (
+            <div className="loader"></div>
+          )}
         </div>
-      )}
+
+      </form>
+    </div>
+    </div>
+{/* 
+      <Footer /> */}
     </div>
   );
 };
