@@ -1,24 +1,4 @@
-// import React from "react";
-// import GaugeChart from "react-gauge-chart";
 
-// const AtsScoreGauge = ({ score }) => {
-//   return (
-//     <div className="ats-score-container">
-//       <h3>ATS Score</h3>
-//       <GaugeChart
-//         id="ats-gauge-chart"
-//         colors={["#FF0000", "#FFFF00", "#00FF00"]}
-//         arcWidth={0.01}
-//         percent={score / 100}
-//         textColor="#000"
-//         needleColor="#000000"
-//       />
-//       <h4>{score} / 100</h4>
-//     </div>
-//   );
-// };
-
-// export default AtsScoreGauge;
 
 import React, { useEffect, useRef } from 'react';
 import './styles/ATSScoreGuage.css';

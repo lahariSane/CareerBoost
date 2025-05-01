@@ -1,25 +1,4 @@
-// // src/Components/Results/ResumeBuilderCTA.jsx
-// import React from "react";
-// import { useNavigate } from "react-router-dom";
-// import "./styles/ResumeBuilderCTA.css";
 
-// const ResumeBuilderCTA = () => {
-//   const navigate = useNavigate();
-
-//   const handleClick = () => {
-//     navigate("/resume-builder");  // Navigate to the Resume Builder page
-//   };
-
-//   return (
-//     <div className="cta-container">
-//       <button className="cta-btn" onClick={handleClick}>
-//         Build Your Perfect Resume
-//       </button>
-//     </div>
-//   );
-// };
-
-// export default ResumeBuilderCTA;
 
 import React from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';

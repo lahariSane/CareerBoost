@@ -1,23 +1,4 @@
-// import React from "react";
-// import "./styles/ScoreBreakdown.css";
 
-// const ScoreBreakdown = ({ breakdownData }) => {
-//   return (
-//     <div className="score-breakdown">
-//       <h3>Section-wise Breakdown</h3>
-//       <div className="breakdown-grid">
-//         {breakdownData.map((item, index) => (
-//           <div className="breakdown-card" key={index}>
-//             <h4>{item.section}</h4>
-//             <p>{item.score}/20</p>
-//           </div>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default ScoreBreakdown;
 
 import React, { useEffect, useRef } from 'react';
 import './styles/ScoreBreakdown.css';

@@ -1,21 +1,4 @@
 
-// import React from "react";
-// import "./styles/Suggestions.css";
-
-// const Suggestions = ({ suggestions }) => {
-//   return (
-//     <div className="suggestions-section">
-//       <h3>Insights & Suggestions</h3>
-//       <ul className="suggestions-list">
-//         {suggestions.map((tip, index) => (
-//           <li key={index}>💡 {tip}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
-
-// export default Suggestions;
 
 import React from 'react';
 import { CheckCircle } from 'lucide-react';

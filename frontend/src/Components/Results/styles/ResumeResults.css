@@ -21,6 +21,7 @@ body {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-8);
+  background-color: #e6c4af;
 }
 
 /* Common Card Style */

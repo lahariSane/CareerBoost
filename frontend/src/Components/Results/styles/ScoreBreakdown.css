@@ -1,37 +1,4 @@
-/* .score-breakdown {
-    margin-top: 2rem;
-    text-align: center;
-  }
-  
-  .breakdown-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    margin-top: 1rem;
-  }
-  
-  .breakdown-card {
-    background-color: #f7f7f7;
-    border-radius: 12px;
-    padding: 1rem 1.5rem;
-    width: 160px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .breakdown-card h4 {
-    margin: 0 0 0.5rem;
-    font-size: 1rem;
-  }
-  
-  .breakdown-card p {
-    font-weight: bold;
-    color: #333;
-    font-size: 1.1rem;
-  }
-   */
-
-   @import './variables.css';
+@import './variables.css';
 
 .score-breakdown-container {
   height: 100%;
