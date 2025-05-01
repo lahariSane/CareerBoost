@@ -110,8 +110,6 @@ const ResumeUploadPage = () => {
       </form>
     </div>
     </div>
-{/* 
-      <Footer /> */}
     </div>
   );
 };

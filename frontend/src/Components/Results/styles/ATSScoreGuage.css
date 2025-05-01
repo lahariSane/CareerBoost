@@ -1,0 +1,139 @@
+/* .ats-score-gauge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .ats-score-gauge h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+   */
+
+@import './variables.css';
+
+.ats-score-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-6);
+}
+
+/* .ats-score-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 100%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+    transform: rotate(30deg);
+  }
+  
+  .ats-score-container::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+    border-radius: 50%;
+  } */
+
+.ats-score-gauge {
+  position: relative;
+  width: 220px;
+  height: 220px;
+  margin: var(--space-4) 0;
+}
+
+.ats-score-circle {
+  fill: none;
+  stroke: var(--neutral-200);
+  stroke-width: 15;
+}
+
+.ats-score-indicator {
+  fill: none;
+  stroke-width: 15;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease-in-out;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  stroke-dasharray: 628;
+}
+
+.ats-score-indicator-high {
+  stroke: var(--success-500);
+}
+
+.ats-score-indicator-medium {
+  stroke: var(--warning-500);
+}
+
+.ats-score-indicator-low {
+  stroke: var(--error-500);
+}
+
+.ats-score-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--neutral-900);
+}
+
+.ats-score-label {
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--neutral-500);
+}
+
+.ats-score-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+  margin-bottom: var(--space-4);
+}
+
+.ats-score-description {
+  font-size: 1.05rem;
+  color: var(--error-900);
+  max-width: 600px;
+  margin: var(--space-4) auto;
+  line-height: 1.6;
+}
+
+.ats-score-tag {
+  display: inline-block;
+  padding: var(--space-1) var(--space-3);
+  margin: var(--space-4) 0;
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.ats-score-tag-high {
+  background-color: var(--success-50);
+  color: var(--success-700);
+}
+
+.ats-score-tag-medium {
+  background-color: var(--warning-50);
+  color: var(--warning-700);
+}
+
+.ats-score-tag-low {
+  background-color: var(--error-50);
+  color: var(--error-700);
+}

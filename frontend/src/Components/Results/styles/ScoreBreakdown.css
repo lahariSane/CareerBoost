@@ -1,0 +1,124 @@
+/* .score-breakdown {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .breakdown-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  
+  .breakdown-card {
+    background-color: #f7f7f7;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    width: 160px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .breakdown-card h4 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+  }
+  
+  .breakdown-card p {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1rem;
+  }
+   */
+
+   @import './variables.css';
+
+.score-breakdown-container {
+  height: 100%;
+}
+
+.score-breakdown-header {
+  margin-bottom: var(--space-5);
+}
+
+.score-breakdown-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--neutral-900);
+  margin-bottom: var(--space-2);
+}
+
+.score-breakdown-subtitle {
+  font-size: 0.875rem;
+  color: var(--neutral-500);
+}
+
+.score-breakdown-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.score-breakdown-item {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  transition: transform var(--transition-fast), background-color var(--transition-fast);
+}
+
+.score-breakdown-item:hover {
+  background-color: var(--neutral-100);
+  transform: translateX(4px);
+}
+
+.score-breakdown-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-2);
+}
+
+.score-breakdown-item-title {
+  font-weight: 500;
+  color: var(--neutral-800);
+}
+
+.score-breakdown-item-score {
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--error-900);
+}
+
+.score-breakdown-progress {
+  height: 6px;
+  width: 100%;
+  background-color: var(--neutral-200);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.score-breakdown-progress-bar {
+  height: 100%;
+  background-color: var(--primary-500);
+  border-radius: var(--radius-sm);
+  transition: width 1s ease-in-out;
+}
+
+.score-breakdown-total {
+  margin-top: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--neutral-200);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score-breakdown-total-title {
+  font-weight: 600;
+  color: var(--neutral-900);
+}
+
+.score-breakdown-total-score {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--primary-700);
+}

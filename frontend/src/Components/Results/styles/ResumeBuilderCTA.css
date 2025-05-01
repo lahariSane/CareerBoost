@@ -1,0 +1,138 @@
+/* .cta-container {
+    text-align: center;
+    margin-top: 3rem;
+  }
+  
+  .cta-btn {
+    padding: 12px 24px;
+    font-size: 1.2rem;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .cta-btn:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+  }
+   */
+
+   @import './variables.css';
+
+   .resume-builder-cta {
+     position: relative;
+     padding: var(--space-8);
+     border-radius: var(--radius-lg);
+     background: linear-gradient(135deg, var(--primary-300), var(--primary-500));
+     color: white;
+     overflow: hidden;
+   }
+   
+   .resume-builder-cta-content {
+     position: relative;
+     z-index: 2;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: center;
+   }
+   
+   .resume-builder-cta-title {
+     font-size: 1.75rem;
+     font-weight: 700;
+     margin-bottom: var(--space-3);
+     color: white;
+   }
+   
+   .resume-builder-cta-description {
+     font-size: 1.1rem;
+     max-width: 600px;
+     margin-bottom: var(--space-6);
+     line-height: 1.6;
+     color: rgba(255, 255, 255, 0.9);
+   }
+   
+   .resume-builder-cta-button {
+     padding: var(--space-3) var(--space-6);
+     background-color: var(--primary-200);
+     color: var(--primary-800);
+     border: none;
+     border-radius: var(--radius-md);
+     font-weight: 600;
+     font-size: 1rem;
+     cursor: pointer;
+     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+   }
+   
+   .resume-builder-cta-button:hover {
+     transform: translateY(-3px);
+     box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+   }
+   
+   .resume-builder-cta-button:active {
+     transform: translateY(-1px);
+   }
+   
+   .resume-builder-cta-features {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     gap: var(--space-4);
+     margin-top: var(--space-6);
+   }
+   
+   .resume-builder-cta-feature {
+     display: flex;
+     align-items: center;
+     font-size: 0.9rem;
+     color: rgba(255, 255, 255, 0.9);
+   }
+   
+   .resume-builder-cta-feature-icon {
+     margin-right: var(--space-2);
+     color: var(--primary-200);
+   }
+   
+   /* Decoration elements */
+   .resume-builder-cta::before {
+     content: '';
+     position: absolute;
+     top: -50%;
+     right: -50%;
+     width: 100%;
+     height: 200%;
+     background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+     transform: rotate(30deg);
+   }
+   
+   .resume-builder-cta::after {
+     content: '';
+     position: absolute;
+     bottom: -30%;
+     left: -10%;
+     width: 60%;
+     height: 60%;
+     background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0) 70%);
+     border-radius: 50%;
+   }
+   
+   @media (min-width: 768px) {
+     .resume-builder-cta-content {
+       flex-direction: row;
+       text-align: left;
+       justify-content: space-between;
+       align-items: center;
+     }
+     
+     .resume-builder-cta-left {
+       max-width: 60%;
+     }
+     
+     .resume-builder-cta-features {
+       justify-content: flex-start;
+     }
+   }

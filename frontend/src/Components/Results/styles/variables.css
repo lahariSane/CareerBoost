@@ -1,0 +1,89 @@
+:root {
+    /* Color System */
+    --primary-50: #f7f3f0;
+    --primary-100: #e9ded4;
+    --primary-200: #e6c4af;
+    --primary-300: #b38d72;
+    --primary-400: #bb8d72;
+    --primary-500: #75636c;
+    --primary-600: #62754f;
+    --primary-700: #4e342e;
+    --primary-800: #3e2723;
+    --primary-900: #29282e;
+    
+    --success-50: #f0f4ed;
+    --success-100: #e1e9db;
+    --success-200: #c3d3b7;
+    --success-300: #a5bd93;
+    --success-400: #87a76f;
+    --success-500: #62754f;
+    --success-600: #4e5e3f;
+    --success-700: #3a472f;
+    --success-800: #262f1f;
+    --success-900: #12170f;
+    
+    --warning-50: #f7f3f0;
+    --warning-100: #efe7e1;
+    --warning-200: #dfcfc3;
+    --warning-300: #cfb7a5;
+    --warning-400: #bf9f87;
+    --warning-500: #b38d72;
+    --warning-600: #8f715b;
+    --warning-700: #6b5544;
+    --warning-800: #47392d;
+    --warning-900: #231c16;
+    
+    --error-50: #f5f0f0;
+    --error-100: #ebe1e1;
+    --error-200: #d7c3c3;
+    --error-300: #c3a5a5;
+    --error-400: #af8787;
+    --error-500: #75636c;
+    --error-600: #7b5252;
+    --error-700: #5c3d3d;
+    --error-800: #3e2929;
+    --error-900: #1f1414;
+    
+    --neutral-50: #f7f7f7;
+    --neutral-100: #efefef;
+    --neutral-200: #dfdfdf;
+    --neutral-300: #cfcfcf;
+    --neutral-400: #bfbfbf;
+    --neutral-500: #92a2ba;
+    --neutral-600: #75636c;
+    --neutral-700: #4e342e;
+    --neutral-800: #3e2723;
+    --neutral-900: #29282e;
+    
+    /* Typography */
+    --font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    
+    /* Spacing System (8px) */
+    --space-1: 0.25rem; /* 4px */
+    --space-2: 0.5rem;  /* 8px */
+    --space-3: 0.75rem; /* 12px */
+    --space-4: 1rem;    /* 16px */
+    --space-5: 1.25rem; /* 20px */
+    --space-6: 1.5rem;  /* 24px */
+    --space-8: 2rem;    /* 32px */
+    --space-10: 2.5rem; /* 40px */
+    --space-12: 3rem;   /* 48px */
+    --space-16: 4rem;   /* 64px */
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem; /* 4px */
+    --radius-md: 0.5rem;  /* 8px */
+    --radius-lg: 0.75rem; /* 12px */
+    --radius-xl: 1rem;    /* 16px */
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 350ms ease;
+  }
